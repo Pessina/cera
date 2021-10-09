@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Topbar from "./components/Topbar/Topbar";
+import List from "./components/List/List";
+import ScheduleModal from "./components/ScheduleModal/ScheduleModal.js";
 
-function App() {
+const App = () => {
+  const [scheduleModal, setScheduleModal] = useState({
+    isOpen: false,
+    name: "",
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Topbar />
+      <List setScheduleModal={setScheduleModal} />
+      <ScheduleModal
+        isOpen={scheduleModal.isOpen}
+        name={scheduleModal.name}
+        onRequestClose={() => setScheduleModal(false)}
+      ></ScheduleModal>
     </div>
   );
-}
+};
 
 export default App;
